@@ -1,6 +1,6 @@
 # infra
 
-**Do not use this repo for developement, production use only!**
+**Do not use this repo for development, production use only!**
 
 -----
 
