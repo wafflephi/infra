@@ -1,0 +1,36 @@
+#!/usr/bin/env bash 
+
+set -e
+
+# reference: https://git-scm.com/docs/git-submodule
+
+BRANCH='main' # this may be 'master' in some occurences
+ 
+get_args() {
+  while [[ "$1" ]]; do
+    case $1 in
+      "-r" | "--recursive") RECURSIVE=true ;;
+    esac
+
+    shift 
+
+  done
+}
+
+do_git_stuff() {
+  git submodule foreach git pull origin $BRANCH
+  if [ "$RECURSIVE" == true ]; then
+    git submodule foreach git submodule foreach git pull origin $BRANCH
+  fi
+}
+
+main() {
+  get_args "$@"
+
+  do_git_stuff
+
+  return 0
+
+}
+
+main "$@"
