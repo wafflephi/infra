@@ -18,6 +18,7 @@ get_args() {
 }
 
 do_git_stuff() {
+  git submodule update --init --recursive
   git submodule foreach git pull origin $BRANCH
   if [ "$RECURSIVE" == true ]; then
     git submodule foreach git submodule foreach git pull origin $BRANCH
